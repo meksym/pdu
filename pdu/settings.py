@@ -7,7 +7,7 @@ SECRET_KEY = (
     'zxrdvcr-ez47*&3(udl198ptbggfuw#_g'
 )
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['pdu.sumy.ua']
 
@@ -30,7 +30,6 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'pdu.settings.DebugMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -117,9 +116,3 @@ if DEBUG:
     STATIC_ROOT = None
     STATICFILES_DIRS = [BASE_DIR / 'static']
 
-    class DebugMiddleware:
-        def __init__(self, get_response):
-            self.get_response = get_response
-
-        def __call__(self, request):
-            return self.get_response(request)
