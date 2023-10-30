@@ -1,20 +1,61 @@
 {% extends 'layouts/base.html' %}
+
 {% load static %}
+
 {% block title %}{{ article.title }} | {{ block.super }}{% endblock %}
 {% block ogtype %}article{% endblock %}
 {% block ogtitle %}{{ article.title }} | {{ block.super }}{% endblock %}
+{% block extheader %}
+    <style>
+        .documents {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .documents:not(:last-child) {
+            margin-bottom: 40px;
+        }
+
+        .documents h3 {
+            color: #7b7b7b;
+        }
+
+        .documents a:not(:last-child) {
+            margin-bottom: 1em;
+        }
+    </style>
+{% endblock %}
+
 {% block body %}
     {% include 'layouts/navigation.html' %}
+
     <div class="small-wrapper text-decoration article-view">
         <h1>{% firstof article.title article.name %}</h1>
-        {% if article.document %}
-            <a class="dark-button download-link" href="{{ article.document.url }}" download>
+
+        {% if documents.count > 1 %}
+            <div class="documents">
+                <h3>Документи</h3>
+
+                {% for doc in documents %}
+                    <a class="dark-button download-link"
+                       href="{{ doc.file.url }}"
+                       download
+                    >
+                        {% firstof doc.name doc.file_name as output %}
+                        {{ output|truncatechars:40 }}
+                    </a>
+                    <br>
+                {% endfor %}
+            </div>
+        {% elif documents.count == 1 %}
+            {% firstof documents|first as doc  %}
+            <a class="dark-button download-link" href="{{ doc.file.url }}" download>
                 Завантажити документ
             </a>
         {% endif %}
-        <main>
-            {{ article.html_text|safe }}
-        </main>
+
+        <main>{{ article.html_text|safe }}</main>
     </div>
+
     {% include 'layouts/footer.html' %}
 {% endblock %}
