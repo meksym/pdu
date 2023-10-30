@@ -1,0 +1,282 @@
+@use "sass:color"
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap')
+@font-face
+    font-family: 'Zona Pro'
+    src: local('Zona Pro Regular'), local('Zona-Pro-Regular'), url('/static/fonts/ZonaPro-Regular.woff2') format('woff2'), url('/static/fonts/ZonaPro-Regular.woff') format('woff'), url('/static/fonts/ZonaPro-Regular.ttf') format('truetype')
+    font-weight: 400
+    font-style: normal
+
+
+$main-font-family: 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+$header-font-family: 'Zona Pro', 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+$border-radius: 16px
+$dark-color: #1f1f1f
+$main-background-color: #f5f5f5
+$block-shadow: 2px 3px 7px 2px rgb(0, 0, 0, 0.05)
+
+
+*
+    font-weight: 400
+
+
+html
+    scroll-behavior: smooth
+    scroll-behavior: smooth
+    text-rendering: optimizeSpeed
+
+
+body
+    font-family: $main-font-family
+
+
+input,
+button,
+textarea,
+select
+    font: inherit
+
+
+a,
+a:focus,
+a:hover
+    text-decoration: none !important
+
+
+:root
+    --primary: #023e7d
+    --secondary: #001845
+    --accent: #FEFCFB
+    --primary-fg: #fff
+    --body-fg: #1f1f1f
+    --body-bg: #fefcfb
+    --body-quiet-color: #1f1f1f
+    --body-loud-color: #000
+    --header-color: #fff
+    --header-branding-color: var(--accent)
+    --header-bg: var(--secondary)
+    --header-link-color: var(--primary-fg)
+    --breadcrumbs-fg: #c4dce8
+    --breadcrumbs-link-fg: var(--body-bg)
+    --breadcrumbs-bg: var(--primary)
+    --link-fg: var(--primary)
+    --link-hover-color: #4697bb
+    --link-selected-fg: #5b80b2
+    --hairline-color: #e8e8e8
+    --border-color: #ccc
+    --error-fg: #ba2121
+    --message-success-bg: #dfd
+    --message-warning-bg: #ffc
+    --message-error-bg: #ffefef
+    --darkened-bg: #f8f8f8
+    --selected-bg: #e4e4e4
+    --selected-row: #a9d6e57d
+    --button-fg: #fff
+    --button-bg: var(--primary)
+    --button-hover-bg: #012A4A
+    --default-button-bg: var(--secondary)
+    --default-button-hover-bg: #123874
+    --close-button-bg: #014F86
+    --close-button-hover-bg: #012A4A
+    --delete-button-bg: #ba2121
+    --delete-button-hover-bg: #a41515
+    --object-tools-fg: var(--button-fg)
+    --object-tools-bg: var(--close-button-bg)
+
+
+#header
+    #branding a
+        font-weight: 600
+    #user-tools
+        font-weight: 400
+        font-size: 0.9rem
+        text-transform: none
+        a
+            border: none
+            &:hover
+                color: var(--link-hover-color) !important
+
+
+#nav-filter
+    border-left: none
+    border-right: none
+    margin-bottom: 15px
+    padding: 5px
+
+
+#content
+    h1
+        font-size: 1.75rem
+        font-weight: 700
+    h2
+        font-size: 1.5rem
+        font-weight: 600
+
+
+.hidden
+    display: none !important
+
+
+fieldset .form-row
+    overflow: inherit !important
+    *
+        font-family: $main-font-family
+        font-weight: 400 !important
+        font-size: 0.9rem !important
+    input,
+    textarea
+        width: 60% !important
+    input[type="checkbox"],
+    input[type="number"]
+        width: auto !important
+    textarea
+        resize: vertical
+        max-height: 350px
+        min-height: 100px
+    .view-image
+        position: relative
+        max-width: 60%
+        height: 300px
+        padding: 5px
+        margin-left: 170px
+        border-radius: 4px
+        cursor: pointer
+        background-color: var(--darkened-bg)
+        background-position: center
+        background-repeat: no-repeat
+        background-size: cover
+        &::after
+            content: ""
+            position: absolute
+            top: 0
+            left: 0
+            z-index: 1
+            width: 100%
+            height: 100%
+            opacity: 0
+            border-radius: 50%
+            background-size: 40px
+            background-position: center
+            background-repeat: no-repeat
+            background-color: color.adjust($dark-color, $alpha: -0.6)
+            background-image: url('/static/image/_picture1.svg')
+            transition: 0.4s ease
+        &:hover::after
+            border-radius: 4px
+            opacity: 0.5
+
+
+.ql-toolbar,
+.ql-container
+    margin: 0 auto !important
+    max-width: 840px // TMP
+.ql-toolbar
+    position: sticky
+    top: 0px
+    z-index: 1
+    background-color: #fff // TMP
+    border-radius: 4px 4px 0 0
+.ql-container
+    border-radius: 0 0 4px 4px
+.ql-editor
+    min-height: 700px
+    padding: 40px 70px !important
+    line-height: 1.5 !important
+    *
+        background: none !important
+        color: $dark-color !important
+        font-family: $main-font-family !important
+    p,
+    ul,
+    ol,
+    h3,
+    blockquote
+        margin-bottom: 20px !important
+        font-size: 1.1rem !important
+    h2
+        font-weight: 700 !important
+        font-size: 1.75rem !important
+        line-height: 1.35 !important
+        margin-bottom: 25px !important
+    h3
+        font-weight: 700 !important
+        font-size: 1.25rem !important
+    img
+        display: block !important
+        margin: 5px auto !important
+        border-radius: calc($border-radius / 4) !important
+        max-height: 500px !important
+    iframe
+        border-radius: calc($border-radius / 4) !important
+        max-height: 500px !important
+        margin: 5px auto !important
+    ul,
+    ol
+        margin-left: 0 !important
+        padding-left: 30px !important
+    li
+        padding: 0 !important
+        list-style: "\2022   " !important
+        margin: 5px !important
+        font-size: 1.1rem !important
+    a
+        color: #265cb0 !important
+        font-size: 1.1rem !important
+    b,
+    strong,
+    b *,
+    strong *
+        font-size: 1.1rem !important
+        font-weight: 600 !important
+    s,
+    em
+        font-size: 1.1rem !important
+.ql-editor ul > li::before
+    display: none
+
+
+// @media (max-width: 1399px)
+    // .wrapper
+    //     max-width: 1140px
+    // .content
+    //     max-width: 840px
+
+
+// @media (max-width: 1199px)
+    // .wrapper
+    //     max-width: 960px
+    // .content
+    //     max-width: 760px
+
+
+// @media (max-width: 991px)
+    // .wrapper
+    //     max-width: 720px
+    // .content
+    //     max-width: 620px
+
+
+// @media (max-width: 767px)
+    // .wrapper
+    //     max-width: 540px
+    // .content
+    //     max-width: 540px
+
+
+// @media (max-width: 575px)
+    // .wrapper
+    //     max-width: 100%
+
+
+// @media (min-width: 1400px)
+    // .wrapper
+    //     max-width: 1320px
+    // .content
+    //     max-width: 840px
+
+
+@media (prefers-reduced-motion: reduce)
+    *
+        animation-duration: 0.01ms !important
+        animation-iteration-count: 1 !important
+        transition-duration: 0.01ms !important
+        scroll-behavior: auto !important

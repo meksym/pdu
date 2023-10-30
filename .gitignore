@@ -1,0 +1,37 @@
+# Other
+credentials/
+
+# Mac
+.DS_Store
+
+# Django
+*.log
+*.pot
+*.pyc
+__pycache__/
+db.sqlite3
+local.py
+migrations/
+media/
+static/ucozbackup
+
+
+# Python
+*.py[cod]
+*$py.class
+temp.py
+temporary.py
+tmp.py
+
+# Python environments
+.env/
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Visual Studio Code
+.vscode/
+

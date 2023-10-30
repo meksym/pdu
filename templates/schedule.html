@@ -1,0 +1,58 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block ogtitle %}Розклад занять | {{ block.super }}{% endblock %}
+{% block title %}Розклад занять | {{ block.super }}{% endblock %}
+{% block ogtype %}article{% endblock %}
+{% block ogimage %}{% static 'image/schedule.jpg' %}{% endblock %}
+{% block extheader %}
+    <meta name="description" content="Розклад занять">
+    <meta property="og:description" content="Розклад занять">
+{% endblock %}
+{% block body %}
+    {% include 'layouts/navigation.html' %}
+    <div class="schedule-head">
+        <h2>Розклад занять</h2>
+        <p>На 2022-2023 навчальний рік</p>
+    </div>
+    <div class="wrapper schedule">
+        <table>
+            <thead>
+                <tr>
+                    <th>Гурток</th>
+                    <th>Понеділок</th>
+                    <th>Вівторок</th>
+                    <th>Середа</th>
+                    <th>Четвер</th>
+                    <th>П'ятниця</th>
+                    <th>Субота</th>
+                    <th>Неділя</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for name, display  in departments %}
+                    <tr>
+                        <td class="schedule-department" colspan="8">{{ display }}</td>
+                    </tr>
+                    {% for section in sections %}
+                        {% if section.department == name %}
+                            <tr>
+                                <td class="section-cell">
+                                    <h3>{{ section.name }}</h3>
+                                    <a class="light-button" href="{{ section.get_absolute_url }}">Детальніше</a>
+                                </td>
+                                <td>{{ section.schedule_for_monday }}</td>
+                                <td>{{ section.schedule_for_tuesday }}</td>
+                                <td>{{ section.schedule_for_wednesday }}</td>
+                                <td>{{ section.schedule_for_thursday }}</td>
+                                <td>{{ section.schedule_for_friday }}</td>
+                                <td>{{ section.schedule_for_saturday }}</td>
+                                <td>{{ section.schedule_for_sunday }}</td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% include 'layouts/footer.html' %}
+{% endblock %}

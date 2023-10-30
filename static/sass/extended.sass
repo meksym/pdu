@@ -1,0 +1,346 @@
+$block-shadow: 2px 3px 7px 2px rgb(0, 0, 0, 0.05)
+$dark-color: #1f1f1f
+
+.mask
+    position: fixed
+    top: 0
+    left: 0
+    width: 100%
+    height: 100vh
+    background-color: rgba(0, 0, 0, 0.35)
+    animation: 0.3s ease forwards show
+    z-index: 3
+    img
+        position: absolute
+        right: 50px
+        top: 50px
+        width: 35px
+        cursor: pointer
+
+.navigation-container
+    position: sticky
+    top: 0
+    box-shadow: $block-shadow
+    background-color: #fff
+    user-select: none
+    z-index: 2
+    ul
+        list-style-type: none
+
+.navigation-list
+    list-style-type: none
+    & > li
+        display: inline-block
+        & > a
+            margin-right: 25px
+            padding: 14px 0
+            font-size: 1.2rem
+            font-weight: 500
+            color: #909090
+    a,
+    span
+        position: relative
+        display: inline-block
+        text-decoration: none
+        line-height: 1.5
+        cursor: pointer
+        transition: color 0.3s ease, text-shadow 0.3s ease
+        &:hover
+            color: $dark-color
+
+.hidden-list
+    position: fixed
+    top: 0
+    left: -100%
+    width: 600px
+    height: 100vh
+    padding: 50px 75px 50px 50px
+    background-color: #fff
+    box-shadow: $block-shadow
+    transition: left 0.3s ease
+    overflow-y: auto
+    z-index: 4
+    h2
+        margin-bottom: 75px
+        font-size: 1.25rem
+        &::after
+            content: ""
+            display: block
+            width: 50px
+            height: 3px
+            margin-top: 10px
+            background-color: $dark-color
+    & > li
+        font-size: 1.35rem
+        margin-bottom: 35px
+    a,
+    span
+        font-weight: 400
+        color: #707070
+        &:hover
+            color: $dark-color
+    a::before
+        content: "\2022"
+        position: absolute
+        left: -15px
+    span::before
+        content: "↓"
+        position: absolute
+        left: -25px
+
+    .nested
+        padding: 0 50px
+        transform-origin: 50% 0%
+        max-height: 0px
+        transform: scaleY(0)
+        transition: transform 0.15s ease, max-height 0.15s ease
+    .active-nested
+        max-height: 999999px
+        transform: scaleY(1)
+
+    .level1 li
+        margin-top: 15px
+        a
+            font-size: 1.25rem
+    .level2 li
+        margin-top: 10px
+        a
+            font-size: 1.1rem
+
+    .mobile-close-hidden-list
+        display: none
+        width: 35px
+        margin-bottom: 50px
+        cursor: pointer
+
+.active-navigation-list
+    left: 0 !important
+
+.active-hidden-list
+    left: 0 !important
+
+#openNavigation
+    display: none
+    width: 25px
+    filter: opacity(0.7)
+
+#closeNavigation
+    display: none
+    cursor: pointer
+    width: 25px
+    margin-bottom: 25px
+
+.schedule-head
+    text-align: center
+    margin: 75px 0
+    h2
+        font-size: 2rem
+    p
+        font-size: 1rem
+        margin: 10px 0
+
+.schedule
+    box-shadow: $block-shadow
+    border-radius: 16px
+    background-color: #fff
+    margin-top: 40px
+    margin-bottom: 40px
+    line-height: 1.5
+    table
+        border-collapse: collapse
+        user-select: none
+        width: 100%
+        th,
+        td
+            padding: 25px 35px
+            box-shadow: 10px 0px 7px 0px rgb(0 0 0 / 1%)
+        td:first-child
+            width: 30%
+        td
+            width: 10%
+
+        thead
+            border-radius: 16px
+            tr
+                position: sticky
+                top: 70px
+                background-color: rgba(255, 255, 255, 0.9)
+                backdrop-filter: blur(2px)
+                box-shadow: 0px 0px 7px 2px rgb(0 0 0 / 25%)
+                border-radius: 16px
+                th
+                    font-weight: 500
+                th:first-child
+                    border-radius: 16px 0 0 16px
+                th:last-child
+                    border-radius: 0 16px 16px 0
+
+        tr
+            background-color: #fff
+            transition: background 0.3s ease
+            &:hover
+                background-color: #f7f7f7
+
+        tbody tr:last-child
+            border-radius: 0 0 16px 16px
+            td:first-child
+                border-radius: 0 0 0 16px
+            td:last-child
+                border-radius: 0 0 16px 0
+
+        .schedule-department
+            text-align: center
+            color: #616161
+            background: #e8eaef
+            text-transform: uppercase
+            font-weight: 500
+
+        .section-cell
+            box-shadow: 10px 0px 7px 0px rgb(0 0 0 / 3%)
+            h3
+                font-weight: 600
+            a
+                font-size: 0.8rem
+                margin-top: 15px
+
+.footer
+    background-color: #e6e6ea
+    border-top: 1px solid rgba(0, 0, 0, 0.12)
+    color: #505050
+    .wrapper
+        display: flex
+        flex-wrap: wrap
+        padding: 50px 0
+        img
+            display: inline-block
+            height: 1rem
+            margin-right: 10px
+            opacity: 0.7
+        iframe
+            width: 65%
+            border: none
+            border-radius: 16px
+            filter: grayscale(0.5)
+            box-shadow: 2px 3px 7px 2px rgb(0, 0, 0, 0.15)
+        .footer-contact
+            width: 35%
+            padding-right: 70px
+            h2
+                font-weight: 500
+                // border-bottom: 2px solid #8d8d8d
+                margin-bottom: 25px
+                &::after
+                    content: ""
+                    display: block
+                    margin-top: 10px
+                    height: 3px
+                    width: 100px
+                    background-color: #8d8d8d
+            p
+                margin-bottom: 10px
+
+.download-link
+    margin-bottom: 60px
+    &::before
+        content: "↓ "
+
+@media (max-width: 1399px)
+    .footer .wrapper
+        .footer-contact
+            width: 40%
+        iframe
+            width: 60%
+    .schedule
+        table
+            th,
+            td
+                padding: 25px 20px
+
+@media (max-width: 1199px)
+    .footer .wrapper
+        .footer-contact
+            width: 50%
+        iframe
+            width: 50%
+    .schedule
+        table
+            th,
+            td,
+            .section-cell h3
+                font-size: 1rem
+
+@media (max-width: 991px)
+    .footer .wrapper
+        .footer-contact
+            width: 100%
+            margin-bottom: 35px
+        iframe
+            width: 100%
+
+    .schedule
+        overflow-x: auto
+        table thead tr
+            position: static
+            backdrop-filter: none
+
+    .mask
+        display: none
+
+    #openNavigation
+        display: block
+
+    #closeNavigation
+        display: block
+
+    .navigation-container
+        padding: 15px
+
+    .navigation-list
+        position: fixed
+        top: 0
+        left: -100%
+        height: 100vh
+        width: 100vw
+        max-width: none
+        padding: 25px
+        overflow-y: auto
+        background-color: #fff
+        transition: left 0.3s ease
+        & > li
+            display: block
+        a,
+        span
+            display: block
+            border-bottom: 1px solid #dfdfdf
+            padding: 10px 0
+            margin-bottom: 20px
+            cursor: pointer
+            text-decoration: none
+            transition: color 0.3s ease
+            color: #1f1f1f !important
+            font-weight: 500
+            font-size: 1.2rem
+
+    .hidden-list
+        width: 100vw
+        padding: 35px
+        .nested
+            padding: 0 15px
+        a::before
+            display: none
+        .mobile-close-hidden-list
+            display: block
+
+@media (max-width: 575px)
+    .footer .wrapper
+        .footer-contact
+            padding: 25px
+        iframe
+            border-radius: 0
+
+    .schedule
+        border-radius: 0 !important
+        *
+            border-radius: 0 !important
+        .light-button
+            border-radius: 4px !important

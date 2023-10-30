@@ -1,0 +1,20 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block title %}{{ article.title }} | {{ block.super }}{% endblock %}
+{% block ogtype %}article{% endblock %}
+{% block ogtitle %}{{ article.title }} | {{ block.super }}{% endblock %}
+{% block body %}
+    {% include 'layouts/navigation.html' %}
+    <div class="small-wrapper text-decoration article-view">
+        <h1>{% firstof article.title article.name %}</h1>
+        {% if article.document %}
+            <a class="dark-button download-link" href="{{ article.document.url }}" download>
+                Завантажити документ
+            </a>
+        {% endif %}
+        <main>
+            {{ article.html_text|safe }}
+        </main>
+    </div>
+    {% include 'layouts/footer.html' %}
+{% endblock %}

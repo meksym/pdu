@@ -1,0 +1,78 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block ogtitle %}Гуртки | {{ block.super }}{% endblock %}
+{% block title %}Гуртки | {{ block.super }}{% endblock %}
+{% block ogimage %}{% static 'image/ogsections.jpg' %}{% endblock %}
+{% block body %}
+    {% include 'layouts/navigation.html' %}
+    <div class="wrapper" id="filter">
+        <h2>Фільтр гуртків</h2>
+        <div id="dropFilterButton" class="dark-button">Очистити</div>
+        <div class="two-item">
+            <div class="item">
+                <h3>Сфера інтересів</h3>
+                <ul class="directions">
+                    {% for direction in directions %}
+                        <li>{{ direction.name }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="item">
+                <h3>Відділ</h3>
+                <ul class="departments">
+                    <li value="mass">Організаційно-масовий відділ</li>
+                    <li value="art">Відділ художньо-естетичного виховання</li>
+                    <li value="decor">Відділ декоративно-прикладної творчості</li>
+                    <li value="it">Відділ інформаційно-методичного супроводу</li>
+                    <li value="sport">Відділ туризму, спорту та фізичного розвитку</li>
+                </ul>
+            </div>
+        </div>
+        <h3>Вік</h3>
+        <b>від</b>
+        <select id="minAgeSelect">
+            {% for i in range %}
+            <option value="{{ i }}">{{ i }}</option>
+            {% endfor %}
+        </select>
+        <b>до</b>
+        <select id="maxAgeSelect">
+            {% for i in range %}
+                <option value="{{ i }}">{{ i }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    {% for section in sections %}
+        <div class="wrapper big-section-preview">
+            <div class="section-image"
+                {% if section.banner.name %}
+                    style="background-image: url('{{ section.banner.url }}')"
+                {% else %}
+                    style="background-image: url('{% static 'image/main.jpg' %}')"
+                {% endif %}>
+                    <div class="tags">
+                        <span>від {{ section.min_age }} до {{ section.max_age }} років</span>
+                        {% for direction in section.direction.all %}
+                            <span>{{ direction.name }}</span>
+                        {% endfor %}
+                    </div>
+            </div>
+            <div class="inner-content">
+                <main class="text-decoration">
+                    <h1>{{ section.name }}</h1>
+                    <p>{{ section.preview_text }}</p>
+                    <a class="light-button about-button" href="{{ section.get_absolute_url }}">Детальніше</a>
+                </main>
+            </div>
+            {% comment %} hidden data {% endcomment %}
+            <input type="hidden" name="max_age" value="{{ section.max_age }}">
+            <input type="hidden" name="min_age" value="{{ section.min_age }}">
+            <input type="hidden" name="department" value="{{ section.department }}">
+            {% for direction in section.direction.all %}
+                <input type="hidden" name="direction" value="{{ direction.name }}">
+            {% endfor %}
+        </div>
+    {% endfor %}
+    {% include 'layouts/footer.html' %}
+    <script src="{% static 'js/filter.js' %}"></script>
+{% endblock %}

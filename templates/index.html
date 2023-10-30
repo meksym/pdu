@@ -1,0 +1,91 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block ogtitle %}Головна | {{ block.super }}{% endblock %}
+{% block title %}Головна | {{ block.super }}{% endblock %}
+{% block extheader %}
+    <meta name="description" content="Сумськи палац дітей та юнацтва — багатопрофільний позашкільний навчально-виховний заклад у м. Суми.">
+    <meta property="og:description" content="Сумськи палац дітей та юнацтва — багатопрофільний позашкільний навчально-виховний заклад у м. Суми.">
+{% endblock %}
+{% block body %}
+    {% include 'layouts/navigation.html' %}
+    <div class="sugges-container">
+        {% if not banners %}
+            <div class="sugges" style="background-image: url('{% static 'image/main.jpg' %}')">
+                <div class="wrapper">
+                    <div class="inner">
+                        <h1>Сумський Палац дітей та юнацтва — багатопрофільний позашкільний навчально-виховний заклад.</h1>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            {% for banner in banners %}
+                <div class="sugges"
+                    {% if banner.background.name %}
+                        style="background-image: url('{{ banner.background.url }}')"
+                    {% else %}
+                        style="background-image: url('{% static 'image/main.jpg' %}')"
+                    {% endif %}>
+                        <div class="wrapper">
+                            <div class="inner">
+                                <h1>{{ banner.title }}</h1>
+                                {% if banner.show_link %}
+                                    <a class="light-button" href="{{ banner.link }}">Детальніше</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <div class="dots">
+            {% for banner in banners %}
+                <div class="dot"></div>
+            {% endfor %}
+        </div>
+    </div>
+    <section class="page-section">
+        <div class="wrapper">
+            <h2>Останні новини</h2>
+            <div class="latest-news">
+                <img id="moveLeftBtn" src="{% static 'image/left.svg' %}" alt="arrow" class="arrow-img">
+                <div class="news-container">
+                    {% for n in news %}
+                        <a class="news-preview" href="{{ n.get_absolute_url }}">
+                            <div class="date">{{ n.date_of_published }}</div>
+                            <p>{{ n.title }}</p>
+                        </a>
+                    {% endfor %}
+                </div>
+                <img id="moveRightBtn" src="{% static 'image/right.svg' %}" alt="arrow" class="arrow-img">
+            </div>
+        </div>
+    </section>
+    {% for name, display  in departments %}
+        <section class="page-section">
+            <div class="wrapper">
+                <h2 class="department-name">{{ display }}</h2>
+                <div class="section-container">
+                    {% for section in sections %}
+                        {% if section.department == name %}
+                            <a href="{{ section.get_absolute_url }}" class="section-preview">
+                                {% if section.banner.name %}
+                                    <div style="background-image: url('{{ section.banner.url }}')"></div>
+                                {% else %}
+                                    <div style="background-image: url('{% static 'image/main.jpg' %}')"></div>
+                                {% endif %}
+                                <main>
+                                    <h3>{{ section.name }}</h3>
+                                    <img src="{% static 'image/right.svg' %}" alt="right">
+                                </main>
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    {% endfor %}
+    <section class="page-section"></section>
+    {% include 'layouts/footer.html' %}
+    <script src="{% static 'js/swipe.js' %}"></script>
+    <script src="{% static 'js/index.js' %}"></script>
+{% endblock %}

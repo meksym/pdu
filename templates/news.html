@@ -1,0 +1,35 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block ogtitle %}Новини | {{ block.super }}{% endblock %}
+{% block title %}Новини | {{ block.super }}{% endblock %}
+{% block ogimage %}{% static 'image/ognews.jpg' %}{% endblock %}
+{% block body %}
+    {% include 'layouts/navigation.html' %}
+    {% for n in news %}
+        <div class="small-wrapper text-decoration big-news-preview">
+            <div class="date">{{ n.date_of_published }}</div>
+            <h2>{{ n.title }}</h2>
+            {{ n.preview_html|safe }}
+            <div><a class="light-button more-button" href="{{ n.get_absolute_url }}">Детальніше</a></div>
+        </div>
+    {% endfor %}
+    <ul class="pages">
+        <div>
+            {% for i in news.paginator.page_range %}
+                {% if i == news.number %}
+                    <li class="current-page page-number">{{ i }}</li>
+                {% elif i >= news.number|add:'-2' and i <= news.number|add:'2' %}
+                    <li><a class="page-number" href="{% url 'news' i %}">{{ i }}</a></li>
+                {% endif %}
+            {% endfor %}
+            {% comment %} EDIT {% endcomment %}
+            {% if news.number == 1 %}
+                <li><a class="page-number" href="{% url 'news' 4 %}">{{ 4 }}</a></li>
+                <li><a class="page-number" href="{% url 'news' 5 %}">{{ 5 }}</a></li>
+            {% elif news.number == 2 %}
+                <li><a class="page-number" href="{% url 'news' 5 %}">{{ 5 }}</a></li>
+            {% endif %}
+        </div>
+    </ul>
+    {% include 'layouts/footer.html' %}
+{% endblock %}

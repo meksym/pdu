@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2YD5QSJCFD"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-2YD5QSJCFD');
+    </script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="{% block keywords %}Сумськи Палац дітей та юнацтва, Суми, Палац{% endblock %}">
+    <link rel="shortcut icon" href="{% static 'image/rainbow.png' %}" type="image/png">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/extended.css' %}">
+    <meta property="og:url" content="{% block ogurl %}{{ request.path }}{% endblock %}">
+    <meta property="og:type" content="{% block ogtype %}website{% endblock %}">
+    <meta property="og:title" content="{% block ogtitle %}Сумськи Палац дітей та юнацтва{% endblock %}">
+    <meta property="og:image" content="{% block ogimage %}{% static 'image/main.jpg' %}{% endblock %}">
+    <meta property="og:image:height" content="{% block ogimageheight %}630{% endblock %}">
+    <meta property="og:image:width" content="{% block ogimagewidth %}1200{% endblock %}">
+    {% block extheader %}{% endblock %}
+    <title>{% block title %}Сумськи Палац дітей та юнацтва{% endblock %}</title>
+</head>
+<body>
+    {% block body %}{% endblock %}
+    <script src="{% static 'js/extended.js' %}"></script>
+</body>
+</html>

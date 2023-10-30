@@ -1,0 +1,127 @@
+{% load static %}
+<h1 class="wrapper logo-container">
+    <a href="/"><img src="{% static 'image/rainbow.png' %}" alt="logo"></a>
+    <a href="/" class="inner-text">Сумський Палац<br>дітей та юнацтва</a>
+</h1>
+
+<nav class="navigation-container">
+    <div class="wrapper">
+        <img id="openNavigation" src="{% static 'image/menu.svg' %}" alt="menu">
+    </div>
+    <ul class="wrapper navigation-list">
+        <img id="closeNavigation" src="{% static 'image/close.svg' %}" alt="close">
+        <li><a href="{% url 'index' %}">Головна</a></li>
+        <li><a href="{% url 'sections' %}">Гуртки</a></li>
+        <li><a href="{% url 'news' 1 %}">Новини</a></li>
+        <li>
+            <a href="#about">Про заклад</a>
+            <ul id="about" class="hidden-list">
+                <img class="mobile-close-hidden-list" src="{% static 'image/back.svg' %}" alt="back">
+                <h2>Про заклад</h2>
+                {% for article in articles %}
+                    {% if article.type == 'about' %}
+                        <li><a href="{{ article.get_absolute_url }}">{{ article.name }}</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </li>
+        <li>
+            <a href="#education">Освітній процес</a>
+            <ul id="education" class="hidden-list">
+                <img class="mobile-close-hidden-list" src="{% static 'image/back.svg' %}" alt="back">
+                <h2>Освітній процес</h2>
+                <li><a href="{% url 'schedule' %}">Розклад занять</a></li>
+                <li>
+                    <span class="next-nested">Гуртки</span>
+                    <ul class="nested level1">
+                        {% for name, display  in types  %}
+                            <li>
+                                <span class="next-nested">{{ display }}</span>
+                                <ul class="nested level2">
+                                    {% for section in sections %}
+                                        {% if section.type == name %}
+                                            <li><a href="{{ section.get_absolute_url }}">{{ section.name }}</a></li>
+                                        {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                {% for article in articles %}
+                    {% if article.type == 'education' %}
+                        <li><a href="{{ article.get_absolute_url }}">{{ article.name }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                <li>
+                    <span class="next-nested">Атестація педагогічних працівників</span>
+                    <ul class="nested level1">
+                        {% for article in articles %}
+                            {% if article.type == 'teacher_certification' %}
+                                <li><a href="{{ article.get_absolute_url }}">{{ article.name }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#public_information">Публічна інформація</a>
+            <ul id="public_information" class="hidden-list">
+                <img class="mobile-close-hidden-list" src="{% static 'image/back.svg' %}" alt="back">
+                <h2>Публічна інформація</h2>
+                {% for article in articles %}
+                    {% if article.type == 'public_information' %}
+                        <li><a href="{{ article.get_absolute_url }}">{{ article.name }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                <li>
+                    <span class="next-nested">Фінансова звітність</span>
+                    <ul class="nested level1">
+                        <li>
+                            <span class="next-nested">Кошторис</span>
+                            <ul class="nested level2">
+                                {% for article in articles %}
+                                    {% if article.type == 'budget' %}
+                                        <li><a href="{{ article.get_absolute_url }}">{{ article.name }}</a></li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </li>
+                        <li>
+                            <span class="next-nested">Звіт про надходження та використання коштів</span>
+                            <ul class="nested level2">
+                                {% for article in articles %}
+                                    {% if article.type == 'finance_report' %}
+                                        <li><a href="{{ article.get_absolute_url }}">{{ article.name }}</a></li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <span class="next-nested">Річний звіт про діяльність Палацу</span>
+                    <ul class="nested level1">
+                        {% for article in articles %}
+                            {% if article.type == 'annual_report' %}
+                                <li><a href="{{ article.get_absolute_url }}">{{ article.name }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </li>
+                <li>
+                    <span class="next-nested">СТОП булінг</span>
+                    <ul class="nested level1">
+                        {% for article in articles %}
+                            {% if article.type == 'bullying' %}
+                                <li><a href="{{ article.get_absolute_url }}">{{ article.name }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+
