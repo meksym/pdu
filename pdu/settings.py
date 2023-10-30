@@ -9,12 +9,9 @@ SECRET_KEY = (
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['pdu.sumy.ua']
+ALLOWED_HOSTS = ['127.0.0.1']
 
-hosts = ALLOWED_HOSTS
-schemes = ('http://', 'https://')
-
-CSRF_TRUSTED_ORIGINS = [scheme + host for scheme in schemes for host in hosts]
+CSRF_TRUSTED_ORIGINS = ['https://pdu.sumy.ua']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
