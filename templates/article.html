@@ -32,7 +32,7 @@
     <div class="small-wrapper text-decoration article-view">
         <h1>{% firstof article.title article.name %}</h1>
 
-        {% if documents.count > 1 %}
+        {% if documents.count > 0 %}
             <div class="documents">
                 <h3>Документи</h3>
 
@@ -42,16 +42,11 @@
                        download
                     >
                         {% firstof doc.name doc.file_name as output %}
-                        {{ output|truncatechars:40 }}
+                        Завантажити документ "{{ output|truncatechars:40 }}"
                     </a>
                     <br>
                 {% endfor %}
             </div>
-        {% elif documents.count == 1 %}
-            {% firstof documents|first as doc  %}
-            <a class="dark-button download-link" href="{{ doc.file.url }}" download>
-                Завантажити документ
-            </a>
         {% endif %}
 
         <main>{{ article.html_text|safe }}</main>

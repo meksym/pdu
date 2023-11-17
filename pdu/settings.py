@@ -112,4 +112,3 @@ if DEBUG:
 
     STATIC_ROOT = None
     STATICFILES_DIRS = [BASE_DIR / 'static']
-
